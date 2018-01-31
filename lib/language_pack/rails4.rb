@@ -82,6 +82,7 @@ WARNING
         @cache.load_without_overwrite public_assets_folder
         @cache.load default_assets_cache
 
+        puts "Additional cache directories: #{additional_asset_cache_directories.inspect}"
         load_additional_asset_cache_directories
 
         precompile.invoke(env: rake_env)
