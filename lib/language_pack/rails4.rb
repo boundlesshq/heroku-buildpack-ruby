@@ -82,6 +82,8 @@ WARNING
         @cache.load_without_overwrite public_assets_folder
         @cache.load default_assets_cache
 
+        load_additional_asset_cache_directories
+
         precompile.invoke(env: rake_env)
 
         if precompile.success?
@@ -92,6 +94,8 @@ WARNING
           rake.task("assets:clean").invoke(env: rake_env)
 
           cleanup_assets_cache
+
+          store_additional_cache_directories
           @cache.store public_assets_folder
           @cache.store default_assets_cache
         else
@@ -99,6 +103,26 @@ WARNING
         end
       end
     end
+  end
+
+  def load_additional_asset_cache_directories
+    additional_asset_cache_directories.each do |dir|
+      puts "Loading additional asset cache: #{dir}"
+      @cache.load dir
+    end
+  end
+
+  def store_additional_cache_directories
+    additional_asset_cache_directories.each do |dir|
+      puts "Storing additional asset cache: #{dir}"
+      @cache.store dir
+    end
+  end
+
+  def additional_asset_cache_directories
+    @additional_asset_cache_directories ||= ENV
+      .fetch('RUBY_ASSET_CACHE_DIRECTORIES', '')
+      .split(/,\s*/)
   end
 
   def cleanup_assets_cache
