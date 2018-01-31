@@ -84,8 +84,7 @@ WARNING
 
         load_additional_asset_cache_directories
 
-        puts "Files:"
-        puts
+        puts "Files:\n"
         puts Dir.glob(".cache/hard-source/**/*").inspect
 
         precompile.invoke(env: rake_env)
@@ -94,8 +93,7 @@ WARNING
           log "assets_precompile", :status => "success"
           puts "Asset precompilation completed (#{"%.2f" % precompile.time}s)"
 
-          puts "Files:"
-          puts
+          puts "Files:\n"
           puts Dir.glob(".cache/hard-source/**/*").inspect
 
           puts "Cleaning assets"
