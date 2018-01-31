@@ -121,8 +121,7 @@ WARNING
   end
 
   def additional_asset_cache_directories
-    @additional_asset_cache_directories ||= ENV
-      .fetch('RUBY_ASSET_CACHE_DIRECTORIES', '')
+    @additional_asset_cache_directories ||= (env('RUBY_ASSET_CACHE_DIRECTORIES') || '')
       .split(/,\s*/)
   end
 
