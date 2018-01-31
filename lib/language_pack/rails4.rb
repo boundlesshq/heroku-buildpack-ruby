@@ -82,14 +82,17 @@ WARNING
         @cache.load_without_overwrite public_assets_folder
         @cache.load default_assets_cache
 
-        puts "Additional cache directories: #{additional_asset_cache_directories.inspect}"
         load_additional_asset_cache_directories
+
+        system("ls -al .cache || echo 'no cache dir'")
 
         precompile.invoke(env: rake_env)
 
         if precompile.success?
           log "assets_precompile", :status => "success"
           puts "Asset precompilation completed (#{"%.2f" % precompile.time}s)"
+
+          system("ls -al .cache || echo 'no cache dir'")
 
           puts "Cleaning assets"
           rake.task("assets:clean").invoke(env: rake_env)
