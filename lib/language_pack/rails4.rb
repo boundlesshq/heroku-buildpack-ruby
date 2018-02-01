@@ -93,8 +93,8 @@ WARNING
           log "assets_precompile", :status => "success"
           puts "Asset precompilation completed (#{"%.2f" % precompile.time}s)"
 
-          # puts "Files:"
-          # puts Dir.glob(".cache/hard-source/**/*").inspect
+          puts "Files:"
+          puts Dir.glob(".cache/hard-source/**/*").inspect
 
           puts "Cleaning assets"
           rake.task("assets:clean").invoke(env: rake_env)
